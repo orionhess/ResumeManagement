@@ -3,10 +3,8 @@ name = "resumemanagement"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Orion Hess", email = "orionhess@gmail.com" }
-]
-requires-python = ">=3.14"
+authors = [{ name = "Orion Hess", email = "orionhess@gmail.com" }]
+requires-python = ">=3.10"
 dependencies = []
 
 [project.scripts]
@@ -17,6 +15,4 @@ requires = ["uv_build>=0.10.7,<0.11.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = [
-    "pytest>=9.0.2",
-]
+dev = ["pytest>=9.0.2"]
