@@ -103,3 +103,27 @@ class View:
         section = sections[section_index - 1]
 
         self.__controller.remove_section(section["text"])
+
+    def add_item(self, section: str) -> None:
+        item_name = input("What is the text in this section?")
+        self.__controller.add_item(section, item_name)
+
+    def remove_item(self, section: str, item: str) -> None:
+        self.print_sections()
+        section_index = -1
+        while True:
+            try:
+                section_index = int(input("Which section to remove? 0 to exit"))
+                break
+            except ValueError:
+                print("That is not a valid selection")
+
+        if section_index == 0:
+            return False
+
+        items = self.__controller.get_items(section)
+        if len(items) < section_index - 1:
+            return False
+        item = items[section_index - 1]
+
+        self.__controller.remove_item(section, item)

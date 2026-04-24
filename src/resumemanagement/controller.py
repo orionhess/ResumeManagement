@@ -28,3 +28,15 @@ class Controller:
     def remove_section(self, section: str) -> bool:
         """Remove a section from the resume, returning a boolean for status"""
         return True  # Not implemented
+
+    def add_item(self, section: str, item: str) -> bool:
+        """Add an item to a section, returning a boolean for status"""
+        return True  # Not implemented
+    
+    def remove_item(self, section: str, item: str) -> bool:
+        """Remove an item from a section, returning a boolean for status"""
+        return True  # Not implemented
+    
+    def remove_section(self, section: str, item: str) -> bool:
+        """Remove an item from a section, returning a boolean for status"""
+        return True  # Not implemented
