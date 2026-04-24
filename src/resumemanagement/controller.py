@@ -20,3 +20,11 @@ class Controller:
 
     def get_items_active(self, section: str) -> list[dict[str, Any]]:
         return [{"text": "not implemented", "selected": True}]
+    
+    def add_section(self, section: str) -> bool:
+        """Add a section to the resume, returning a boolean for status"""
+        return True  # Not implemented
+    
+    def remove_section(self, section: str) -> bool:
+        """Remove a section from the resume, returning a boolean for status"""
+        return True  # Not implemented

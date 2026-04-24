@@ -79,3 +79,27 @@ class View:
             print(f"{section['text']}")
             for item in self.__controller.get_items_active(section):
                 print(f"  {item['text']}")
+
+    def add_section(self) -> None:
+        section_name = input("What is the name of the new section?")
+        self.__controller.add_section(section_name)
+
+    def remove_section(self) -> None:
+        self.print_sections()
+        section_index = -1
+        while True:
+            try:
+                section_index = int(input("Which section to remove? 0 to exit"))
+                break
+            except ValueError:
+                print("That is not a valid selection")
+
+        if section_index == 0:
+            return False
+
+        sections = self.__controller.get_sections()
+        if len(sections) < section_index - 1:
+            return False
+        section = sections[section_index - 1]
+
+        self.__controller.remove_section(section["text"])
