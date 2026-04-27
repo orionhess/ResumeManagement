@@ -30,7 +30,7 @@ class View:
 
             print(f"[{selected}] {i}) {item['text']}")
 
-    def select_section(self) -> bool:
+    def get_section(self) -> str:
         """Select a section, returning a boolean for status"""
         self.print_sections()
         section_index = -1
@@ -42,15 +42,14 @@ class View:
                 print("That is not a valid selection")
 
         if section_index == 0:
-            return False
+            return ""
 
         sections = self.__controller.get_sections()
         if len(sections) < section_index - 1:
-            return False
+            return ""
         section = sections[section_index - 1]
 
-        self.select_item(section["text"])
-        return True
+        return section["text"]
 
     def select_item(self, section: str) -> bool:
         """Select an item within a section, returning a boolean for status"""
@@ -58,7 +57,7 @@ class View:
         section_index = -1
         while True:
             try:
-                section_index = int(input("Which item to select? 0 to exit"))
+                section_index = int(input("Which item to select? 0 to exit -> "))
                 break
             except ValueError:
                 print("That is not a valid selection")
@@ -77,11 +76,11 @@ class View:
     def print_active(self) -> None:
         for section in self.__controller.get_sections_active():
             print(f"{section['text']}")
-            for item in self.__controller.get_items_active(section):
+            for item in self.__controller.get_items_active(section["text"]):
                 print(f"  {item['text']}")
 
     def add_section(self) -> None:
-        section_name = input("What is the name of the new section?")
+        section_name = input("What is the name of the new section? -> ")
         self.__controller.add_section(section_name)
 
     def remove_section(self) -> None:
@@ -89,41 +88,42 @@ class View:
         section_index = -1
         while True:
             try:
-                section_index = int(input("Which section to remove? 0 to exit"))
+                section_index = int(input("Which section to remove? 0 to exit -> "))
                 break
             except ValueError:
                 print("That is not a valid selection")
 
         if section_index == 0:
-            return False
+            return
 
         sections = self.__controller.get_sections()
         if len(sections) < section_index - 1:
-            return False
+            return
         section = sections[section_index - 1]
 
         self.__controller.remove_section(section["text"])
 
     def add_item(self, section: str) -> None:
-        item_name = input("What is the text in this section?")
+        item_name = input("What is the text in this item? -> ")
         self.__controller.add_item(section, item_name)
 
-    def remove_item(self, section: str, item: str) -> None:
-        self.print_sections()
-        section_index = -1
+    def remove_item(self, section: str) -> None:
+        self.print_items(section)
+        item_index = -1
         while True:
             try:
-                section_index = int(input("Which section to remove? 0 to exit"))
+                item_index = int(input("Which item to remove? 0 to exit"))
                 break
             except ValueError:
-                print("That is not a valid selection")
+                print("That is not a valid item")
 
-        if section_index == 0:
-            return False
+        if item_index == 0:
+            return
 
         items = self.__controller.get_items(section)
-        if len(items) < section_index - 1:
-            return False
-        item = items[section_index - 1]
+        if len(items) < item_index - 1:
+            return
+        item = items[item_index - 1]
 
-        self.__controller.remove_item(section, item)
+        self.__controller.remove_item(section, item["text"])
+
