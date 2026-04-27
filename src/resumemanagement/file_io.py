@@ -1,5 +1,6 @@
-from resumemanagement.controller import Controller
 import json
+from typing import Any
+
 
 def save_to_json(data, filename):
     """Saves list of dictionaries to a JSON file"""
@@ -8,8 +9,9 @@ def save_to_json(data, filename):
             json.dump(data, f, indent=4)
     except Exception as e:
         print(f"Error saving file: {e}")
-        
-def load_from_json(filename):
+
+
+def load_from_json(filename) -> list[dict[str, Any]] | None:
     """Loads list of dictionaries from a JSON file"""
     try:
         with open(filename, "r", encoding="utf-8") as f:
